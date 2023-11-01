@@ -2,10 +2,9 @@ import iconChat from "../../assets/img/icon-chat.png";
 import iconMoney from "../../assets/img/icon-money.png";
 import iconSecurity from "../../assets/img/icon-security.png";
 
-
 function Home() {
-    return (
-      <main>
+  return (
+    <main>
       <div className="hero">
         <section className="hero-content">
           <h2 className="sr-only">Promoted Content</h2>
@@ -26,22 +25,16 @@ function Home() {
           </p>
         </div>
         <div className="feature-item">
-          <img
-            src={iconMoney}
-            alt="Chat Icon"
-            className="feature-icon"
-          />
-          <h3 className="feature-item-title">More savings means higher rates</h3>
+          <img src={iconMoney} alt="Chat Icon" className="feature-icon" />
+          <h3 className="feature-item-title">
+            More savings means higher rates
+          </h3>
           <p>
             The more you save with us, the higher your interest rate will be!
           </p>
         </div>
         <div className="feature-item">
-          <img
-            src={iconSecurity}
-            alt="Chat Icon"
-            className="feature-icon"
-          />
+          <img src={iconSecurity} alt="Chat Icon" className="feature-icon" />
           <h3 className="feature-item-title">Security you can trust</h3>
           <p>
             We use top of the line encryption to make sure your data and money
@@ -50,7 +43,7 @@ function Home() {
         </div>
       </section>
     </main>
-    );
-  }
-  
-  export default Home;
+  );
+}
+
+export default Home;

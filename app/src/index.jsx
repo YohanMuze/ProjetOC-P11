@@ -1,19 +1,34 @@
-import React from 'react';
+// REACT & REACT-ROUTER
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import './assets/css/main.css';
+
+// CSS
+import "./assets/css/main.css";
 //import reportWebVitals from './reportWebVitals';
 
-import Home from './pages/Home';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import SignIn from './pages/SignIn';
-import User from './components/User/user';
+// COMPONENTS
+import Home from "./pages/Home";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import SignIn from "./pages/SignIn";
+import User from "./components/User/user";
+
+// REDUX
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+import { userSlice } from "./reducers/user.slice";
+
+const store = configureStore({
+  reducer: {
+    user: userSlice.reducer,
+  },
+  devTools: true,
+});
 
 function Root() {
   return (
     <>
-      
       <Outlet />
       <Footer />
     </>
@@ -28,34 +43,42 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <>
-                    <Header /> 
-                    <Home />
-                </>,
+        element: (
+          <>
+            <Header />
+            <Home />
+          </>
+        ),
       },
       {
-        path:"sign-in",
-        element: <>
-                    <Header /> 
-                    <SignIn />
-                </>,
+        path: "sign-in",
+        element: (
+          <>
+            <Header />
+            <SignIn />
+          </>
+        ),
       },
       {
-        path:"user",
-        element: <>
-                    <Header /> 
-                    <User />
-                </>,
+        path: "user",
+        element: (
+          <>
+            <Header />
+            <User />
+          </>
+        ),
       },
     ],
   },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <Provider store={store}>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </Provider>,
 );
 
 // If you want to start measuring performance in your app, pass a function
