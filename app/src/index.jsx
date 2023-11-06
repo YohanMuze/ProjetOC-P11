@@ -12,23 +12,16 @@ import Home from "./pages/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SignIn from "./pages/SignIn";
-import User from "./components/User/user";
+import Profile from "./pages/Profile/profile";
 
 // REDUX
 import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
-import { userSlice } from "./reducers/user.slice";
-
-const store = configureStore({
-  reducer: {
-    user: userSlice.reducer,
-  },
-  devTools: true,
-});
+import { store } from "./utils/store";
 
 function Root() {
   return (
     <>
+      <Header />
       <Outlet />
       <Footer />
     </>
@@ -43,28 +36,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: (
-          <>
-            <Header />
-            <Home />
-          </>
-        ),
+        element: <Home />,
       },
       {
         path: "sign-in",
-        element: (
-          <>
-            <Header />
-            <SignIn />
-          </>
-        ),
+        element: <SignIn />,
       },
       {
-        path: "user",
+        path: "profile",
         element: (
           <>
-            <Header />
-            <User />
+            <Profile />
           </>
         ),
       },

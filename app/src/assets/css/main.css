@@ -56,9 +56,15 @@ body {
   color: #42b983;
 }
 
+.main-nav-container {
+  display: flex;
+  width: 15%;
+}
+
 .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
+  width: 100%;
 }
 
 .main-nav-item:hover {
@@ -240,6 +246,33 @@ body {
   box-sizing: border-box;
   text-align: left;
   margin-bottom: 2rem;
+}
+
+.account-form-edit-name {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.account-form-edit-name-label {
+  display: flex;
+  align-items: center;
+  gap: 5%;
+}
+
+.account-form-edit-name-label input {
+  width: 60%;
+}
+
+.account-form-edit-name-label input::placeholder {
+  color: black;
+}
+
+.account-form-edit-name-btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 3rem;
 }
 
 .account-amount {

@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import iconUser from "../../assets/img/icon-user.png";
-import { USER_LOGIN, login } from "../../reducers/user.slice";
+import { login } from "../../slices/login.slice";
+import { getUserDatas } from "../../slices/user.slice";
 import { useRef } from "react";
 import { useNavigate } from "react-router";
 
@@ -11,18 +12,22 @@ function SignIn() {
 
   const handleFormLogIn = async (e) => {
     e.preventDefault();
-    console.log(e);
 
     let userID = {
       email: form.current[0].value,
       password: form.current[1].value,
     };
-    console.log(userID);
+
     dispatch(login(userID)).then((result) => {
       if (result.payload) {
-        dispatch(USER_LOGIN(result.payload));
         form.current.reset();
-        navigate("/user");
+        dispatch(getUserDatas(localStorage.getItem("userToken"))).then(
+          (result) => {
+            if (result.payload) {
+              navigate("/profile");
+            }
+          },
+        );
       }
     });
   };

@@ -3,80 +3,74 @@ import { Link, useNavigate } from "react-router-dom";
 import argentBankLogo from "../../assets/img/argentBankLogo.png";
 import iconUser from "../../assets/img/icon-user.png";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 
 function Header() {
   const user = useSelector((state) => state.user);
-  const token = localStorage.getItem("userToken");
-  const [isLog, setIsLog] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (token) {
-      setIsLog(true);
-    } else {
-      setIsLog(false);
-    }
-  }, [isLog, token]);
+  const token = localStorage.getItem("userToken");
 
   const handleLogOut = (event) => {
     event.preventDefault();
     localStorage.removeItem("userToken");
-    navigate("/sign-in");
-    setIsLog(false);
+    navigate("/");
   };
 
-  return isLog ? (
-    <nav className="main-nav">
-      <Link to="/" className="main-nav-logo">
-        <img
-          className="main-nav-logo-image"
-          src={argentBankLogo}
-          alt="Argent Bank Logo"
-        />
-        <h1 className="sr-only">Argent Bank</h1>
-      </Link>
-      <div>
-        <Link className="main-nav-item">
+  if (!token) {
+    return (
+      <nav className="main-nav">
+        <Link to="/" className="main-nav-logo">
           <img
-            className="main-nav-icon-user"
-            src={iconUser}
-            alt="Logo utilisateur"
+            className="main-nav-logo-image"
+            src={argentBankLogo}
+            alt="Argent Bank Logo"
           />
-          {user.firstName}
+          <h1 className="sr-only">Argent Bank</h1>
         </Link>
-        <Link onClick={handleLogOut} className="main-nav-item">
+        <div>
+          <Link to="/sign-in" className="main-nav-item">
+            <img
+              className="main-nav-icon-user"
+              src={iconUser}
+              alt="Logo utilisateur"
+            />
+            Sign In
+          </Link>
+        </div>
+      </nav>
+    );
+  } else {
+    return (
+      <nav className="main-nav">
+        <Link to="/" className="main-nav-logo">
           <img
-            className="main-nav-icon-user"
-            src={iconUser}
-            alt="Logo utilisateur"
+            className="main-nav-logo-image"
+            src={argentBankLogo}
+            alt="Argent Bank Logo"
           />
-          Sign Out
+          <h1 className="sr-only">Argent Bank</h1>
         </Link>
-      </div>
-    </nav>
-  ) : (
-    <nav className="main-nav">
-      <Link to="/" className="main-nav-logo">
-        <img
-          className="main-nav-logo-image"
-          src={argentBankLogo}
-          alt="Argent Bank Logo"
-        />
-        <h1 className="sr-only">Argent Bank</h1>
-      </Link>
-      <div>
-        <Link to="sign-in" className="main-nav-item">
-          <img
-            className="main-nav-icon-user"
-            src={iconUser}
-            alt="Logo utilisateur"
-          />
-          Sign In
-        </Link>
-      </div>
-    </nav>
-  );
+        <div className="main-nav-container">
+          <Link onClick={() => navigate("/profile")} className="main-nav-item">
+            <img
+              className="main-nav-icon-user"
+              src={iconUser}
+              alt="Logo utilisateur"
+            />
+            {user.userName}
+          </Link>
+          <Link onClick={handleLogOut} className="main-nav-item">
+            <img
+              className="main-nav-icon-user"
+              src={iconUser}
+              alt="Logo utilisateur"
+            />
+            Sign Out
+          </Link>
+        </div>
+      </nav>
+    );
+  }
 }
 
 export default Header;

@@ -1,0 +1,26 @@
+visualiser toutes leurs transactions pour le mois en cours, groupées par compte 
+visualiser les détails d'une transaction dans une autre vue 
+
+Récupération des données de transactions
+POST
+user/account
+headers: Bearer token (required)
+code : _ 200 : Transactions datas retrieved successfully
+       _ 400 : Invalid Request
+       _ 401 : Error - Unauthorized (token missing or invalid)
+       _ 500 : Internal Server Error
+
+
+
+
+Ajouter, modifier ou supprimer des informations sur une transaction
+
+Modification des informations sur les transactions
+PUT
+user/account
+headers: Bearer token (required)
+body: informationID (required): "newContent" ("" to delete info)
+code : _ 200 : Information Edited Successfully
+       _ 400 : Invalid Request
+       _ 401 : Error - Unauthorized (token missing or invalid)
+       _ 500 : Internal Server Error
