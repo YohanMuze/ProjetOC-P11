@@ -1,9 +1,21 @@
 //import { useSelector } from "react-redux";
+import { useEffect } from "react";
 import EditName from "../../components/EditName";
 import { Navigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { getUserDatas } from "../../slices/user.slice";
 
 function Profile() {
-  const token = localStorage.getItem("userToken");
+  const dispatch = useDispatch();
+  const token = sessionStorage.getItem("userToken");
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getUserDatas(token));
+    } else {
+      return;
+    }
+  });
 
   if (!token) {
     return <Navigate to="/sign-in" />;

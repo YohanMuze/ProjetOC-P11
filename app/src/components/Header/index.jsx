@@ -2,17 +2,18 @@ import { Link, useNavigate } from "react-router-dom";
 
 import argentBankLogo from "../../assets/img/argentBankLogo.png";
 import iconUser from "../../assets/img/icon-user.png";
+import iconLogout from "../../assets/img/logout.png";
 import { useSelector } from "react-redux";
 
 function Header() {
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  const token = localStorage.getItem("userToken");
+  const token = sessionStorage.getItem("userToken");
 
   const handleLogOut = (event) => {
     event.preventDefault();
-    localStorage.removeItem("userToken");
+    sessionStorage.removeItem("userToken");
     navigate("/");
   };
 
@@ -51,7 +52,7 @@ function Header() {
           <h1 className="sr-only">Argent Bank</h1>
         </Link>
         <div className="main-nav-container">
-          <Link onClick={() => navigate("/profile")} className="main-nav-item">
+          <Link to="/profile" className="main-nav-item">
             <img
               className="main-nav-icon-user"
               src={iconUser}
@@ -62,7 +63,7 @@ function Header() {
           <Link onClick={handleLogOut} className="main-nav-item">
             <img
               className="main-nav-icon-user"
-              src={iconUser}
+              src={iconLogout}
               alt="Logo utilisateur"
             />
             Sign Out

@@ -20,7 +20,7 @@ export default function EditName() {
   const handleFormEdit = async (e) => {
     e.preventDefault();
     let newUserName = form.current[0].value;
-    const token = localStorage.getItem("userToken");
+    const token = sessionStorage.getItem("userToken");
     const datas = {
       token,
       newUserName,

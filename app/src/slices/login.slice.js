@@ -10,7 +10,7 @@ export const login = createAsyncThunk("user/login", async (userID) => {
     })
     .then((res) => {
       const token = res.data.body.token;
-      localStorage.setItem("userToken", token);
+      sessionStorage.setItem("userToken", token);
       return token;
     });
   return response;

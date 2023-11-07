@@ -21,7 +21,7 @@ function SignIn() {
     dispatch(login(userID)).then((result) => {
       if (result.payload) {
         form.current.reset();
-        dispatch(getUserDatas(localStorage.getItem("userToken"))).then(
+        dispatch(getUserDatas(sessionStorage.getItem("userToken"))).then(
           (result) => {
             if (result.payload) {
               navigate("/profile");
